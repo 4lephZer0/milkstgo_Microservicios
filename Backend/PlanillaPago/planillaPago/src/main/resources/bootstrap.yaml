@@ -1,17 +1,18 @@
-server:
-  port: 8083
-
 spring:
   application:
     name: planillaPago
-  jpa:
-    show-sql: true
-    hibernate:
-      dialect: MySQL8Dialect
-      ddl-auto: create-drop
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     dbname: planillaPago
     url: jdbc:mysql://localhost:3306/planillaPago
     username: root
     password: Holahola44#
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: MySQL8Dialect
+      ddl-auto: create-drop
