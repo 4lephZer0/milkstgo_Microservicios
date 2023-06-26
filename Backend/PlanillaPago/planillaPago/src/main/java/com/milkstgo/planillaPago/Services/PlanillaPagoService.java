@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -21,6 +22,7 @@ public class PlanillaPagoService {
     @Autowired
     PlanillaPagoRepository planillaPagoRepository;
 
+    @Autowired
     RestTemplate restTemplate;
 
     public List<PlanillaPagoEntity> crearPlanillaPago(){
@@ -48,8 +50,11 @@ public class PlanillaPagoService {
 
 
         Proveedor proveedor = traerProveedor(codigoProveedor);
+        System.out.println(proveedor);
         Grasas grasas = traerGrasasPorProveedor(codigoProveedor);
+        System.out.println(grasas);
         List<Acopio> acopios = traerAcopiosPorProveedor(codigoProveedor);
+        System.out.println(acopios);
 
         if ((grasas != null) && (!acopios.isEmpty())) {
 
@@ -59,6 +64,7 @@ public class PlanillaPagoService {
 
             List<LocalDate> fechas = stringToFecha(acopios);
 
+            System.out.println(fechas);
             planillaPagoEntity.setQuincena(calcQuincena(fechas));
             planillaPagoEntity.setCodigoProv(codigoProveedor);
             planillaPagoEntity.setNombreProv(proveedor.getNombre());
@@ -335,28 +341,12 @@ public class PlanillaPagoService {
 
     public void borrarPlanillas(){planillaPagoRepository.deleteAll();}
 
-    public List<Proveedor> getProveedores() {
-        ResponseEntity<List<Proveedor>> response = restTemplate.exchange(
-                "http://localhost:8080/proveedores",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Proveedor>>() {}
-        );
-        return response.getBody();
-    }
-
     public List<String> getcodigos() {
-        ResponseEntity<List<String>> response = restTemplate.exchange(
-                "http://localhost:8080/proveedores/codigos",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<String>>() {}
-        );
-        return response.getBody();
+        return restTemplate.getForObject("http://localhost:8080/proveedores/codigos", List.class);
     }
 
     public Proveedor traerProveedor(String id) {
-        return restTemplate.getForObject("http://localhost:8080/proveedores/codigos/" + id, Proveedor.class);
+        return restTemplate.getForObject("http://localhost:8080/proveedores/" + id, Proveedor.class);
     }
 
     public Grasas traerGrasasPorProveedor(String id) {

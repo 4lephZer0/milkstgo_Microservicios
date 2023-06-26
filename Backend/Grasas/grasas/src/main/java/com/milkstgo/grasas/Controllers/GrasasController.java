@@ -18,7 +18,7 @@ public class GrasasController {
     private GrasasService grasasService;
 
     @GetMapping
-    public ResponseEntity<List<GrasasEntity>> traerProveedores() {
+    public ResponseEntity<List<GrasasEntity>> traerGrasas() {
         List<GrasasEntity> grasas = grasasService.verGrasas();
         if(grasas.isEmpty())
             return ResponseEntity.noContent().build();
