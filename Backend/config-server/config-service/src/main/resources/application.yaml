@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/4lephZer0/milkstgoPep2
+          search-paths: config-data
+          username: 4lephZer0
+          password: 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
+  application:
+    name: config-service
