@@ -350,12 +350,12 @@ public class PlanillaPagoService {
     }
 
     public Grasas traerGrasasPorProveedor(String id) {
-        return restTemplate.getForObject("http://localhost:8082/grasas/" + id, Grasas.class);
+        return restTemplate.getForObject("http://localhost:8080/grasas/" + id, Grasas.class);
     }
 
     public List<Acopio> traerAcopiosPorProveedor(String id) {
         ResponseEntity<List<Acopio>> response = restTemplate.exchange(
-                "http://localhost:8081/acopios/" + id,
+                "http://localhost:8080/acopios/" + id,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Acopio>>() {}
