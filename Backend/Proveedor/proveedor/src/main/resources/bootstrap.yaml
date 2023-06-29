@@ -16,3 +16,8 @@ spring:
     hibernate:
       dialect: MySQL8Dialect
       ddl-auto: create-drop
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
