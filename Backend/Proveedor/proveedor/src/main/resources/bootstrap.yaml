@@ -1,6 +1,11 @@
 spring:
   application:
     name: proveedor
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: info
   cloud:
     config:
       enabled: true
@@ -16,8 +21,3 @@ spring:
     hibernate:
       dialect: MySQL8Dialect
       ddl-auto: create-drop
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
