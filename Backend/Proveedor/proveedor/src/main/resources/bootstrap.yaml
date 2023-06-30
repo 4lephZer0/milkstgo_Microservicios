@@ -1,11 +1,6 @@
 spring:
   application:
     name: proveedor
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: info
   cloud:
     config:
       enabled: true
