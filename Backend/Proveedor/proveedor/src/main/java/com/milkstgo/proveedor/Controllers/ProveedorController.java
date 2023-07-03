@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/proveedores")
 public class ProveedorController {
@@ -38,6 +39,11 @@ public class ProveedorController {
         if(codigos.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(codigos);
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> options() {
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping()
